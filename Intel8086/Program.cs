@@ -50,7 +50,11 @@
                     MOV(data[a], data[b]);
                     break;
                 case 2:
-
+                    string temp;
+                    temp = a;
+                    a = b;
+                    b = temp;
+                    printRej(data, name);
                     break;
                 default:
                     Console.WriteLine("nie ma takiej mozliwosci");

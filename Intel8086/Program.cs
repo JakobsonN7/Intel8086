@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Globalization;
+using System.Text;
 
 namespace Intel8086
 {
     internal class Program
     {
 
-        static void printRej(string[] data, string[] name)
+        static void printRej(int[] data, string[] name)
         {
             for (int i = 0; i < data.Length; i++)
             {
                 int j = i + 1;
-                Console.WriteLine("Rejestr " + j + " " + name[i] + " miesci " + data[i]);
+                Console.WriteLine("Rejestr " + j + " " + name[i] + " miesci " + data[i].ToString("X"));
             }
         }
 
@@ -19,12 +20,17 @@ namespace Intel8086
         static void Main(string[] args)
         {
             string[] name = {"AL", "AH", "BL", "BH", "CL", "CH", "DL", "DH"};
-            string[] data = new string[8];
+            int[] data = new int[8];
 
             for (int i = 0; i < data.Length; i++)
-            {
-                Console.WriteLine("Podaj zawartosc rejestru " + name[i] +": ");
-                data[i] = Console.ReadLine();
+            {               
+                Console.WriteLine("Podaj zawartosc rejestru (nie wiekszą niż 255)" + name[i] +": ");
+                data[i] = int.Parse(Console.ReadLine());
+                if(data[i] > 256)
+                {
+                    Console.WriteLine("Podaj zawartosc rejestru " + name[i] +" jescze raz");
+                    data[i] = int.Parse(Console.ReadLine());
+                }
             }
             action:
             Console.WriteLine("co chcesz zrobic?");
@@ -49,7 +55,7 @@ namespace Intel8086
                     printRej(data, name);
                     break;
                 case 2:
-                    string temp = data[st];
+                    int temp = data[st];
                     data[st] = data[nd];
                     data[nd] = temp;
                     Console.Clear();

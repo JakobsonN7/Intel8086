@@ -141,9 +141,10 @@ namespace Intel8086
                     break;
                 case 3:
                     Console.WriteLine("Wybrales opcje NOT");
-                    Console.WriteLine("z jakimi rejestrami chcesz pracowac?");
+                    Console.WriteLine("z jakim rejestrem chcesz pracowac?");
                     printRej(data, name);
 
+                    Console.WriteLine("Podaj rejestr");
                     rd = int.Parse(Console.ReadLine());
                     --rd;
                     string ds = data[rd].ToString();
@@ -164,9 +165,10 @@ namespace Intel8086
                     break;
                 case 4:
                     Console.WriteLine("Wybrales opcje INC");
-                    Console.WriteLine("z jakimi rejestrami chcesz pracowac?");
+                    Console.WriteLine("z jakim rejestrem chcesz pracowac?");
                     printRej(data, name);
 
+                    Console.WriteLine("Podaj rejestr");
                     rd = int.Parse(Console.ReadLine());
                     --rd;
                     data[rd]++;

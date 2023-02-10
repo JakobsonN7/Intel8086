@@ -71,7 +71,8 @@ namespace Intel8086
             char[] binarySumArray = { '0', '0', '0', '0', '0', '0', '0', '0' };
             int sum;
 
-            Console.WriteLine("Uzupelnienie rejestrow");
+            Console.WriteLine("Symulator Intel8086");
+            Console.WriteLine("Jak uzupelniasz rejestry");
             Console.WriteLine("1. Reczne");
             Console.WriteLine("2. Automatyczne");
             int uzu = int.Parse(Console.ReadLine());
@@ -178,9 +179,10 @@ namespace Intel8086
                     break;
                 case 5:
                     Console.WriteLine("Wybrales opcje DEC");
-                    Console.WriteLine("z jakimi rejestrami chcesz pracowac?");
+                    Console.WriteLine("z jakim rejestrem chcesz pracowac?");
                     printRej(data, name);
 
+                    Console.WriteLine("Podaj rejestr");
                     rd = int.Parse(Console.ReadLine());
                     --rd;
                     data[rd]--;

@@ -13,7 +13,7 @@ namespace Intel8086
             for (int i = 0; i < data.Length; i++)
             {
                 int j = i + 1;
-                Console.WriteLine("Rejestr " + j + " " + name[i] + " miesci " + data[i].ToString("X")/*.PadLeft(8,'0')*/);
+                Console.WriteLine("Rejestr " + j + " " + name[i] + " miesci " + data[i].ToString("X"));
             }
         }
 

@@ -20,39 +20,41 @@ namespace Intel8086
         static int[] selRej(int[] which)
         {
             Console.WriteLine("pierwszy rejestr");
-            which[0] = int.Parse(Console.ReadLine());
+            int fit = int.Parse(Console.ReadLine());
             Console.WriteLine("drugi rejestr");
-            which[1] = int.Parse(Console.ReadLine());
+            int seco = int.Parse(Console.ReadLine());
+            which[0] = fit;
+            which[1] = seco;
             --which[0];
             --which[1];
             return which;
         }
 
-        static string toBinSt(string binarySt, int[] which, int[] data)
-        {
-            string std = data[which[0]].ToString();
-            binarySt = Convert.ToString(Convert.ToInt32(std, 10), 2).PadLeft(8, '0');
-            return binarySt;
-        }
+        //static string toBinSt(string binarySt, int[] which, int[] data)
+        //{
+        //    string std = data[which[0]].ToString();
+        //    binarySt = Convert.ToString(Convert.ToInt32(std, 10), 2).PadLeft(8, '0');
+        //    return binarySt;
+        //}
 
-        static string toBinNd(string binaryNd, int[] which, int[] data)
-        {
-            string ndd = data[which[0]].ToString();
-            binaryNd = Convert.ToString(Convert.ToInt32(ndd, 10), 2).PadLeft(8, '0');
-            return binaryNd;
-        }
+        //static string toBinNd(string binaryNd, int[] which, int[] data)
+        //{
+        //    string ndd = data[which[0]].ToString();
+        //    binaryNd = Convert.ToString(Convert.ToInt32(ndd, 10), 2).PadLeft(8, '0');
+        //    return binaryNd;
+        //}
 
-        static char[] toBinArraySt(char[] binaryStCharArray, string binarySt)
-        {
-            binaryStCharArray = binarySt.ToCharArray();
-            return binaryStCharArray;
-        }
+        //static char[] toBinArraySt(char[] binaryStCharArray, string binarySt)
+        //{
+        //    binaryStCharArray = binarySt.ToCharArray();
+        //    return binaryStCharArray;
+        //}
 
-        static char[] toBinArrayNd(char[] binaryNdCharArray, string binaryNd)
-        {
-            binaryNdCharArray = binaryNd.ToCharArray();
-            return binaryNdCharArray;
-        }
+        //static char[] toBinArrayNd(char[] binaryNdCharArray, string binaryNd)
+        //{
+        //    binaryNdCharArray = binaryNd.ToCharArray();
+        //    return binaryNdCharArray;
+        //}
 
         static void Main(string[] args)
         {
@@ -64,6 +66,10 @@ namespace Intel8086
             string binaryNd = "";
             char[] binaryStCharArray = { '0', '0', '0', '0', '0', '0', '0', '0' };
             char[] binaryNdCharArray = { '0', '0', '0', '0', '0', '0', '0', '0' };
+            string std, ndd;
+            string binarySum;
+            char[] binarySumArray = { '0', '0', '0', '0', '0', '0', '0', '0' };
+            int sum;
 
             Console.WriteLine("Uzupelnienie rejestrow");
             Console.WriteLine("1. Reczne");
@@ -76,7 +82,7 @@ namespace Intel8086
                 {
                     Console.WriteLine("Podaj zawartosc rejestru (nie wiekszą niż 255)" + name[i] + ": ");
                     data[i] = int.Parse(Console.ReadLine());
-                    if (data[i] > 256)
+                    if (data[i] > 255)
                     {
                         Console.WriteLine("Podaj zawartosc rejestru " + name[i] + " jescze raz");
                         data[i] = int.Parse(Console.ReadLine());
@@ -186,13 +192,12 @@ namespace Intel8086
                     printRej(data, name);
                     selRej(which);
 
-                    string std = data[which[0]].ToString();
-                    string ndd = data[which[1]].ToString();
+                    std = data[which[0]].ToString();
+                    ndd = data[which[1]].ToString();
                     binarySt = Convert.ToString(Convert.ToInt32(std, 10), 2).PadLeft(8, '0');
-                    toBinArraySt(binaryStCharArray, binarySt);
+                    binaryStCharArray = binarySt.ToCharArray();
                     binaryNd = Convert.ToString(Convert.ToInt32(ndd, 10), 2).PadLeft(8, '0');
-                    toBinArrayNd(binaryNdCharArray, binaryNd);
-                    char[] binarySumArray = new char[8];
+                    binaryNdCharArray = binaryNd.ToCharArray();
                     for (int i = 0;i < 8; i++)
                     {
                         if ((binaryStCharArray[i] == binaryNdCharArray[i]) && (binaryStCharArray[i] == '0')) { binarySumArray[i] = '0'; };
@@ -200,7 +205,7 @@ namespace Intel8086
                         if (binaryStCharArray[i] != binaryNdCharArray[i]) { binarySumArray[i] = '1'; };
                         Console.WriteLine(binarySumArray[i]);
                     }
-                    string binarySum = new string(binarySumArray);
+                    binarySum = new string(binarySumArray);
                     data[which[0]] = Convert.ToInt32(binarySum, 2);
 
                     Console.Clear();
@@ -212,17 +217,19 @@ namespace Intel8086
                     Console.WriteLine("z jakimi rejestrami chcesz pracowac?");
                     printRej(data, name);
                     selRej(which);
-                    toBinSt(binarySt, which, data);
-                    toBinNd(binaryNd, which, data);
-                    toBinArraySt(binaryStCharArray, binarySt);
-                    toBinArrayNd(binaryNdCharArray, binaryNd);
-                    binarySumArray = new char[8];
+
+                    std = data[which[0]].ToString();
+                    binarySt = Convert.ToString(Convert.ToInt32(std, 10), 2).PadLeft(8, '0');
+                    ndd = data[which[1]].ToString();
+                    binaryNd = Convert.ToString(Convert.ToInt32(ndd, 10), 2).PadLeft(8, '0');
+                    binaryStCharArray = binarySt.ToCharArray();
+                    binaryNdCharArray = binaryNd.ToCharArray();
                     for (int i = 0; i < 8; i++)
                     {
                         if ((binaryStCharArray[i] == binaryNdCharArray[i]) && (binaryStCharArray[i] == '0')) { binarySumArray[i] = '0'; };
                         if ((binaryStCharArray[i] == binaryNdCharArray[i]) && (binaryStCharArray[i] == '1')) { binarySumArray[i] = '1'; };
                         if (binaryStCharArray[i] != binaryNdCharArray[i]) { binarySumArray[i] = '0'; };
-                        Console.WriteLine(binarySumArray[i]);
+                        Console.Write(binarySumArray[i]);
                     }
                     binarySum = new string(binarySumArray);
                     data[which[0]] = Convert.ToInt32(binarySum, 2);
@@ -236,6 +243,21 @@ namespace Intel8086
                     printRej(data, name);
                     selRej(which);
 
+                    std = data[which[0]].ToString();
+                    ndd = data[which[1]].ToString();
+                    binarySt = Convert.ToString(Convert.ToInt32(std, 10), 2).PadLeft(8, '0');
+                    binaryStCharArray = binarySt.ToCharArray();
+                    binaryNd = Convert.ToString(Convert.ToInt32(ndd, 10), 2).PadLeft(8, '0');
+                    binaryNdCharArray = binaryNd.ToCharArray();
+                    for (int i = 0; i < 8; i++)
+                    {
+                        if (binaryStCharArray[i] == binaryNdCharArray[i]) { binarySumArray[i] = '0'; };                        
+                        if (binaryStCharArray[i] != binaryNdCharArray[i]) { binarySumArray[i] = '1'; };
+                        Console.WriteLine(binarySumArray[i]);
+                    }
+                    binarySum = new string(binarySumArray);
+                    data[which[0]] = Convert.ToInt32(binarySum, 2);
+
                     Console.Clear();
                     printRej(data, name);
                     break;
@@ -245,6 +267,10 @@ namespace Intel8086
                     printRej(data, name);
                     selRej(which);
 
+                    sum = data[which[0]] + data[which[1]];
+                    if (sum > 255) { sum = sum % 255; }
+                    data[which[0]] = sum;
+
                     Console.Clear();
                     printRej(data, name);
                     break;
@@ -253,6 +279,10 @@ namespace Intel8086
                     Console.WriteLine("z jakimi rejestrami chcesz pracowac?");
                     printRej(data, name);
                     selRej(which);
+
+                    sum = data[which[0]] - data[which[1]];
+                    if (sum < 0) { sum = 255 - Math.Abs(sum); }
+                    data[which[0]] = sum;
 
                     Console.Clear();
                     printRej(data, name);
